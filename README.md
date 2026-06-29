@@ -1,7 +1,7 @@
 ##setup instructions
 
 1. Clone this repository: `git clone https://github.com/LilaSadik/AAC-PAD.git`
-2. Download the required model and audio assets from this link: [Insert Your Google Drive Link Here]
+2. Download the required model and audio assets from this link: (https://drive.google.com/drive/folders/1VKrWicGhA_w10U6h25_sSRIjJ6g8b33y?usp=drive_link)
 3. Download the model.pth file from here: https://huggingface.co/OmarSamir/EGTTS-V0.1/tree/main
 4. Move `model.pth` into the `my_model/` folder, should already have `config.json` & `vocab.json`.
 5. Move `speaker.wav` and any other audio files to the root directory.
