@@ -1,0 +1,182 @@
+.dlg-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: 100%; /* Ensures it fills the available router space */
+}
+
+.dlg-left {
+  padding: 14px;
+  border-right: 0.5px solid var(--color-border-tertiary);
+  display: flex;
+  flex-direction: column;
+}
+
+.dlg-right {
+  padding: 14px;
+  background: var(--color-background-secondary);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Allows history to scroll if it gets too long */
+}
+
+/* Left Side: Shortcuts & Input */
+.shortcuts-header {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  text-align: right;
+  direction: rtl;
+}
+
+.shortcuts {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  justify-content: flex-start;
+  direction: rtl;
+}
+
+.shortcut {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-size: 11px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.shortcut:hover {
+  border-color: #185FA5;
+}
+
+.dlg-input {
+  width: 100%;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 10px;
+  font-size: 13px;
+  resize: none;
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  text-align: right;
+  min-height: 120px;
+  font-family: 'Tajawal', inherit; /* Applies your global font */
+  flex-grow: 1; /* Pushes the speak button to the bottom if container grows */
+}
+
+.dlg-input:focus {
+  outline: none;
+  border-color: #185FA5;
+}
+
+.btn-speak-full {
+  width: 100%;
+  margin-top: 10px;
+  background: #185FA5;
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.btn-speak-full:hover {
+  background: #0C447C;
+}
+
+/* Right Side: History */
+.hist-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  text-align: right;
+  direction: rtl;
+}
+
+.hist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  transition: border-color 0.15s;
+}
+
+.hist-item:hover {
+  border-color: #185FA5;
+}
+
+.hist-text {
+  flex: 1;
+  font-size: 12px;
+  color: var(--color-text-primary);
+  direction: rtl;
+  text-align: right;
+}
+
+.hist-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.hist-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 15px;
+  line-height: 1;
+  border-radius: 4px;
+}
+
+.hist-btn:hover {
+  color: #185FA5;
+  background: rgba(24, 95, 165, 0.1);
+}
+
+.dlg-body {
+  display: flex;
+  height: 100%;
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg);
+}
+
+.dlg-left, .dlg-right {
+  flex: 1; /* Both boxes will now be the exact same width */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px; /* Matches the rounded corners in image_5c4e3b.png */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+/* Ensure history list scrolls inside its box */
+.hist-list {
+  flex: 1;
+  overflow-y: auto;
+}
+

@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+
+/* ── RESET & BASE ─────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue:        #185FA5;
+  --blue-dark:   #0C447C;
+  --blue-light:  #E6F1FB;
+  --blue-border: #B5D4F4;
+  --green:       #0F6E56;
+  --green-light: #E1F5EE;
+  --green-mid:   #1D9E75;
+  --amber:       #B56A0A;
+  --amber-light: #FAEEDA;
+  --amber-border:#EF9F27;
+  --red:         #993C1D;
+  --red-light:   #FAECE7;
+  --red-border:  #F0997B;
+  --purple:      #534AB7;
+  --purple-light:#EEEDFE;
+  --purple-border:#AFA9EC;
+  --teal-light:  #E1F5EE;
+  --teal-border: #5DCAA5;
+  --teal-text:   #085041;
+  --bg:          #F8FAFC;
+  --bg2:         #F1F5F9;
+  --surface:     #FFFFFF;
+  --border:      #E2E8F0;
+  --border2:     #CBD5E0;
+  --text:        #1E293B;
+  --text2:       #475569;
+  --text3:       #94A3B8;
+  --radius:      8px;
+  --shadow:      0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --font-scale: 1;
+}
+
+/* DARK MODE OVERRIDES */
+/* When the HTML tag gets data-theme='dark', these colors override your :root variables */
+[data-theme='dark'] {
+  --bg:          #0F172A; /* Dark slate background */
+  --bg2:         #1E293B; /* Slightly lighter slate */
+  --surface:     #1E293B; /* Surface matching bg2 */
+  --border:      #334155; /* Darker borders */
+  --border2:     #475569;
+  --text:        #F8FAFC; /* White text */
+  --text2:       #CBD5E1; /* Light gray text */
+  --text3:       #94A3B8; 
+  /* We can optionally dim the bright blue a bit for dark mode, or leave it as is */
+  --blue-light:  #1e3a5f;
+}
+
+/* HIGH CONTRAST OVERRIDES */
+[data-high-contrast='true'] {
+  --border:      #000000;
+  --border2:     #000000;
+  --text:        #000000;
+  --text2:       #000000;
+  --shadow:      none;
+}
+[data-theme='dark'][data-high-contrast='true'] {
+  --border:      #FFFFFF;
+  --border2:     #FFFFFF;
+  --text:        #FFFFFF;
+  --text2:       #FFFFFF;
+}
+
+/* LARGE BUTTONS OVERRIDES */
+[data-large-buttons='true'] .tool-btn,
+[data-large-buttons='true'] .shortcut,
+[data-large-buttons='true'] .nav-item {
+  padding: 16px 20px !important;
+  font-size: 15px !important;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  margin: 0;
+}
+
+.app-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.10);
+  display: flex;
+  flex-direction: column;
+  /* Calculates exactly 100% of the screen height minus the 40px of body padding */
+  height: calc(100vh - 40px); 
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── APP SHELL ────────────────────────── */
+.app {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.10);
+}
+
+/* ── TOPBAR ───────────────────────────── */
+.topbar {
+  background: var(--blue);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.topbar-icon { color: #fff; font-size: 20px; }
+.topbar-title { color: #fff; font-size: 15px; font-weight: 600; flex: 1; }
+
+/* ── MODE TABS ────────────────────────── */
+.mode-tabs { display: flex; background: var(--blue-dark); }
+.mode-tab {
+  flex: 1; padding: 8px 6px; font-size: 13px;
+  color: rgba(255,255,255,.55); cursor: pointer;
+  border-bottom: 2px solid transparent; text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+}
+.mode-tab:hover { color: rgba(255,255,255,.8); }
+.mode-tab.active { color: #fff; border-bottom-color: #fff; }
+
+/* ── BOTTOM NAV ───────────────────────── */
+.bottom-nav { 
+  display: flex; 
+  border-top: 1px solid var(--border); 
+  background: var(--surface); /* Keeps the background solid */
+}
+
+.nav-item {
+  flex: 1; /* THIS FIXES THE RATIO: Forces all tabs to be exactly the same width */
+  padding: 10px 4px 8px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 4px;
+  cursor: pointer; 
+  border-top: 2px solid transparent; 
+  transition: all .15s;
+  text-decoration: none !important; /* THIS FIXES THE UNDERLINE FOREVER */
+}
+
+.nav-item:hover { 
+  background: var(--bg); 
+}
+
+.nav-item.active { 
+  border-top-color: var(--blue); 
+}
+
+.nav-item i { 
+  font-size: 20px; 
+  color: var(--text3); 
+}
+
+.nav-item.active i { 
+  color: var(--blue); 
+}
+
+.nav-item span { 
+  font-size: 10px; 
+  color: var(--text3); 
+}
+
+.nav-item.active span { 
+  color: var(--blue); 
+  font-weight: 600; 
+}
+/* ══════════════════════════════════════
+    PICTURE MODE
+══════════════════════════════════════ */
+.screen { display: block; }
+
+.sentence-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; background: var(--bg2);
+  border-bottom: 1px solid var(--border); min-height: 76px;
+}
+.sent-actions { margin-right: auto; display: flex; gap: 6px; flex-shrink: 0; }
+.btn-speak {
+  background: var(--blue); color: #fff; border: none;
+  border-radius: var(--radius); padding: 9px 14px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; gap: 5px; transition: background .2s;
+  font-family: inherit;
+}
+.btn-speak:hover:not(:disabled) { background: var(--blue-dark); }
+.btn-clear {
+  background: var(--surface); color: var(--text2);
+  border: 1px solid var(--border2); border-radius: var(--radius);
+  padding: 9px 11px; font-size: 12px; cursor: pointer;
+  transition: border-color .15s; font-family: inherit;
+}
+.btn-clear:hover { border-color: var(--blue); }
+.sent-slots {
+  display: flex; gap: 7px; flex: 1;
+  overflow-x: auto; scrollbar-width: none;
+}
+.sent-slots::-webkit-scrollbar { display: none; }
+.sent-empty {
+  font-size: 11px; color: var(--text3);
+  direction: rtl; padding-right: 4px; white-space: nowrap;
+}
+.sent-slot {
+  width: 54px; height: 54px; border-radius: var(--radius);
+  border: 2px dashed var(--border2); display: flex;
+  flex-direction: column; align-items: center;
+  justify-content: center; font-size: 20px; gap: 2px;
+  background: var(--surface); flex-shrink: 0;
+  cursor: pointer; transition: transform .1s;
+}
+.sent-slot:active { transform: scale(.9); }
+.sent-slot.filled { border-style: solid; border-color: var(--blue-border); }
+.sent-slot .slbl { font-size: 9px; color: var(--text2); }
+
+.cat-tabs {
+  display: flex; gap: 6px; padding: 10px 14px;
+  overflow-x: auto; border-bottom: 1px solid var(--border);
+  scrollbar-width: none;
+}
+.cat-tabs::-webkit-scrollbar { display: none; }
+.cat-tab {
+  padding: 5px 12px; border-radius: 99px; font-size: 12px;
+  cursor: pointer; white-space: nowrap;
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border); flex-shrink: 0;
+  transition: all .15s; font-family: inherit;
+}
+.cat-header {
+  display: flex; align-items: center;
+  justify-content: space-between; padding: 7px 14px 3px;
+}
+.cat-label { font-size: 12px; color: var(--text2); direction: rtl; font-weight: 500; }
+.legend { font-size: 10px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
+.ldot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-mid); display: inline-block; }
+.icon-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 9px; padding: 9px 14px 14px;
+}
+.icon-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 5px 8px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; cursor: pointer; transition: all .15s;
+  user-select: none; position: relative;
+}
+.icon-card:hover { border-color: var(--blue); background: var(--surface); }
+.icon-card:active { transform: scale(.92); }
+.icon-card.tapped { border-color: var(--blue); background: var(--blue-light); }
+.icon-card .ico { font-size: 26px; line-height: 1; }
+.icon-card .lbl { font-size: 10px; color: var(--text2); text-align: center; direction: rtl; line-height: 1.3; }
+.icon-card .eng { font-size: 9px; color: var(--text3); text-align: center; }
+.must-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-mid); position: absolute; top: 4px; right: 4px; }
+
+/* ── RESPONSIVE ───────────────────────── */
+@media (max-width: 520px) {
+  body { padding: 0; }
+  .app { border-radius: 0; border: none; box-shadow: none; }
+  .icon-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.srow-label { font-size: calc(13px * var(--font-scale)) !important; }
+.srow-sub { font-size: calc(11px * var(--font-scale)) !important; }
+.sct-header { font-size: calc(10px * var(--font-scale)) !important; }
+
+/* Transcriber Text */
+.t-final { font-size: calc(15px * var(--font-scale)) !important; }
+.t-interim { font-size: calc(15px * var(--font-scale)) !important; }
+
+/* Navigation and Headers */
+.topbar-title { font-size: calc(15px * var(--font-scale)) !important; }
+.nav-item span { font-size: calc(10px * var(--font-scale)) !important; }
+
+/* Transcriber Mode */
+.status-pill { font-size: calc(12px * var(--font-scale)) !important; }
+.tool-btn { font-size: calc(12px * var(--font-scale)) !important; }
+.mic-hint { font-size: calc(12px * var(--font-scale)) !important; }
+
+/* Dialogue Mode & Picture Mode Text */
+.message-bubble, 
+.dialogue-text, 
+.shortcut-btn { 
+  font-size: calc(15px * var(--font-scale)) !important; 
+}
+
+.folder-label, 
+.card-label, 
+.grid-text { 
+  font-size: calc(14px * var(--font-scale)) !important; 
+}
+
+/* Picture Mode Text */
+.pic-label { font-size: calc(14px * var(--font-scale)) !important; }
+.category-title { font-size: calc(16px * var(--font-scale)) !important; }
+
+/* Dialogue Mode Text */
+.chat-message { font-size: calc(15px * var(--font-scale)) !important; }
+.quick-reply-btn { font-size: calc(13px * var(--font-scale)) !important; }
+
+/* ── Picture Mode Dynamic Scaling ─────────────────── */
+.sent-empty, 
+.sent-slot span, 
+.slbl { 
+  font-size: calc(14px * var(--font-scale)) !important; 
+}
+
+.cat-tab { 
+  font-size: calc(13px * var(--font-scale)) !important; 
+}
+
+.cat-label { 
+  font-size: calc(12px * var(--font-scale)) !important; 
+}
+
+.lbl { 
+  font-size: calc(13px * var(--font-scale)) !important; 
+}
+
+.eng { 
+  font-size: calc(11px * var(--font-scale)) !important; 
+}
+
+/* Specific adjustment for the large emoji icon in the sentence bar */
+.ico { 
+  font-size: calc(24px * var(--font-scale)) !important; 
+}
+
+/* ── Dialogue Mode Dynamic Scaling ─────────────────── */
+.shortcuts-header { 
+  font-size: calc(12px * var(--font-scale)) !important; 
+}
+
+.shortcut { 
+  font-size: calc(13px * var(--font-scale)) !important; 
+}
+
+.dlg-input { 
+  font-size: calc(14px * var(--font-scale)) !important; 
+}
+
+.btn-speak-full { 
+  font-size: calc(14px * var(--font-scale)) !important; 
+}
+
+.hist-label { 
+  font-size: calc(12px * var(--font-scale)) !important; 
+}
+
+.hist-text { 
+  font-size: calc(13px * var(--font-scale)) !important; 
+}
+
+/* ── RESTORING BOXES AND OUTLINES ─────────────────── */
+
+/* 1. Dialogue Mode Containers */
+.dlg-left, .dlg-right {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 8px;
+}
+
+/* 2. Picture Mode Sentence Bar */
+.sentence-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* 3. Picture Mode Category Header */
+.cat-header {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 8px 16px;
+}
+
+/* 4. Icon Grid Cards */
+.icon-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform 0.1s;
+}
+
+.icon-card:active {
+  transform: scale(0.95);
+  border-color: var(--blue);
+}
+
+/* 5. General Container for Modes */
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg);
+}
