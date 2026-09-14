@@ -17,7 +17,7 @@ function App() {
         {/* The Blue Topbar */}
         <div className="topbar">
           <i className="ti ti-message-2" style={{ color: '#fff', fontSize: '18px' }} aria-hidden="true"></i>
-          <span className="topbar-title">لوحة التواصل بالعربي المصري</span>
+          <span className="topbar-title">وصلة</span>
         </div>
 
         {/* The Scrollable Content Area */}
